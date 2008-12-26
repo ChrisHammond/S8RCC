@@ -50,11 +50,6 @@ namespace Shift8Read.Dnn.CommunityCreditSubmit
                 {
                     txtAffiliateCode.Text = AffiliateCode.ToString(CultureInfo.CurrentCulture);
                     txtAffiliateKey.Text = AffiliateKey.ToString(CultureInfo.CurrentCulture);
-                    txtLastName.Text = LastName.ToString(CultureInfo.CurrentCulture);
-                    txtFirstName.Text = FirstName.ToString(CultureInfo.CurrentCulture);
-                    txtEmailAddress.Text = EmailAddress.ToString(CultureInfo.CurrentCulture);
-
-
                 }
             }
             catch (Exception exc) //Module failed to load
@@ -72,16 +67,10 @@ namespace Shift8Read.Dnn.CommunityCreditSubmit
         {
             try
             {
-
                 ModuleController modules = new ModuleController();
-
                 //modules.UpdateTabModuleSetting(this.TabModuleId, "LogBreadCrumb", (chkLogBreadcrumb.Checked ? "true" : "false"));
                 AffiliateCode = txtAffiliateCode.Text.Trim().ToString();
                 AffiliateKey = txtAffiliateKey.Text.Trim().ToString();
-                EmailAddress= txtEmailAddress.Text.Trim().ToString();
-                LastName = txtLastName.Text.Trim().ToString();
-                FirstName = txtFirstName.Text.Trim().ToString();
-
             }
             catch (Exception exc) //Module failed to load
             {
@@ -122,52 +111,6 @@ namespace Shift8Read.Dnn.CommunityCreditSubmit
                 return string.Empty;
             }
         }
-        private string FirstName
-        {
-            set
-            {
-                ModuleController modules = new ModuleController();
-                modules.UpdateTabModuleSetting(this.TabModuleId, "FirstName", value.ToString(CultureInfo.InvariantCulture));
-            }
-            get
-            {
-                object o = Settings["FirstName"];
-                if (o != null)
-                    return (o.ToString());
-                return string.Empty;
-            }
-        }
-        private string LastName
-        {
-            set
-            {
-                ModuleController modules = new ModuleController();
-                modules.UpdateTabModuleSetting(this.TabModuleId, "LastName", value.ToString(CultureInfo.InvariantCulture));
-            }
-            get
-            {
-                object o = Settings["LastName"];
-                if (o != null)
-                    return (o.ToString());
-                return string.Empty;
-            }
-        }
-        private string EmailAddress
-        {
-            set
-            {
-                ModuleController modules = new ModuleController();
-                modules.UpdateTabModuleSetting(this.TabModuleId, "EmailAddress", value.ToString(CultureInfo.InvariantCulture));
-            }
-            get
-            {
-                object o = Settings["EmailAddress"];
-                if (o != null)
-                    return (o.ToString());
-                return string.Empty;
-            }
-        }
     }
-
 }
 

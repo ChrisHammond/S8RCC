@@ -118,36 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ChooseOne.Text" xml:space="preserve">
-    <value>[Choose One]</value>
-  </data>
-  <data name="ErrorConfig.Text" xml:space="preserve">
-    <value>This module has not been configured properly, please visit the &lt;a href="{0}"&gt;module settings&lt;/a&gt; before first use.</value>
-  </data>
-  <data name="lblCategory.Text" xml:space="preserve">
-    <value>Category</value>
-  </data>
-  <data name="lblDateEarned.Text" xml:space="preserve">
-    <value>Date Earned</value>
-  </data>
-  <data name="lblDescription.Text" xml:space="preserve">
-    <value>Description</value>
-  </data>
-  <data name="lblSubCategory.Text" xml:space="preserve">
-    <value>Sub Category</value>
-  </data>
-  <data name="lblUrl.Text" xml:space="preserve">
-    <value>URL</value>
-  </data>
-  <data name="lblUserInfo.Text" xml:space="preserve">
-    <value>You must be logged into DNN for this module to work. You also need to be using a DNN User with the email address associated to your Community-Credit.com account. Be sure to define the FirstName, Last Name and Email address profile properties of your DNN profile.</value>
-  </data>
-  <data name="lbSubmit.Text" xml:space="preserve">
-    <value>submit</value>
-  </data>
-  <data name="PublishLink.Text" xml:space="preserve">
-    <value>Engage Publish Postings</value>
-  </data>
-  <data name="SubmissionConfirmed.Text" xml:space="preserve">
-    <value>Your Community Credit submission was successful.</value>
+    <value>Choose One</value>
   </data>
 </root>

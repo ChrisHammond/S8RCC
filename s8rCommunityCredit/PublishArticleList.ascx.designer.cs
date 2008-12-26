@@ -11,123 +11,87 @@
 namespace Shift8Read.Dnn.CommunityCreditSubmit {
     
     
-    public partial class View {
+    public partial class PublishArticleList {
         
         /// <summary>
-        /// lblError control.
+        /// upArticleListProgress control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblError;
+        protected global::System.Web.UI.UpdateProgress upArticleListProgress;
         
         /// <summary>
-        /// lblUserInfo control.
+        /// upnlArticleList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblUserInfo;
+        protected global::System.Web.UI.UpdatePanel upnlArticleList;
         
         /// <summary>
-        /// lblCategory control.
+        /// lblItemType control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DotNetNuke.UI.UserControls.LabelControl lblCategory;
+        protected global::DotNetNuke.UI.UserControls.LabelControl lblItemType;
         
         /// <summary>
-        /// ddlCategory control.
+        /// cboCategories control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlCategory;
+        protected global::System.Web.UI.WebControls.DropDownList cboCategories;
         
         /// <summary>
-        /// lblSubCategory control.
+        /// cboCCCategories control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DotNetNuke.UI.UserControls.LabelControl lblSubCategory;
+        protected global::System.Web.UI.WebControls.DropDownList cboCCCategories;
         
         /// <summary>
-        /// ddlSubCategory control.
+        /// dgItems control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlSubCategory;
+        protected global::System.Web.UI.WebControls.GridView dgItems;
         
         /// <summary>
-        /// lblDescription control.
+        /// lblMessage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DotNetNuke.UI.UserControls.LabelControl lblDescription;
+        protected global::System.Web.UI.WebControls.Label lblMessage;
         
         /// <summary>
-        /// txtDescription control.
+        /// lnkAddNewArticle control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDescription;
+        protected global::System.Web.UI.WebControls.HyperLink lnkAddNewArticle;
         
         /// <summary>
-        /// lblDateEarned control.
+        /// cmdSubmit control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DotNetNuke.UI.UserControls.LabelControl lblDateEarned;
-        
-        /// <summary>
-        /// txtDateEarned control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDateEarned;
-        
-        /// <summary>
-        /// lblUrl control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::DotNetNuke.UI.UserControls.LabelControl lblUrl;
-        
-        /// <summary>
-        /// txtUrl control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtUrl;
-        
-        /// <summary>
-        /// lbSubmit control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lbSubmit;
+        protected global::System.Web.UI.WebControls.LinkButton cmdSubmit;
     }
 }

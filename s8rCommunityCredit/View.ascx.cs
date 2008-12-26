@@ -32,6 +32,9 @@ using Engage.Dnn.Publish.Data;
 using DotNetNuke.Common.Utilities;
 using System.Web;
 using CommunityCredit.Components;
+using DotNetNuke.Entities.Modules.Actions;
+using DotNetNuke.Security;
+using DotNetNuke.Entities.Modules;
 
 namespace Shift8Read.Dnn.CommunityCreditSubmit
 {
@@ -41,7 +44,7 @@ namespace Shift8Read.Dnn.CommunityCreditSubmit
     /// The Views8rCommunityCredit class displays the content
     /// </summary>
     /// -----------------------------------------------------------------------------
-    public partial class View : ModuleBase
+    public partial class View : ModuleBase, IActionable
     {
 
         #region Event Handlers
@@ -76,7 +79,7 @@ namespace Shift8Read.Dnn.CommunityCreditSubmit
                 if (!Page.IsPostBack)
                 {
                     //check to see if the settings are configured first.
-                    if (Settings.Contains("AffiliateKey") && Settings.Contains("AffiliateCode") && Settings.Contains("FirstName") && Settings.Contains("LastName") && Settings.Contains("EmailAddress"))
+                    if (Settings.Contains("AffiliateKey") && Settings.Contains("AffiliateCode") && UserInfo !=null)
                     {
                         FillDropDown();
                         BindData();
@@ -84,6 +87,8 @@ namespace Shift8Read.Dnn.CommunityCreditSubmit
                     else
                     {
                         //todo:display a configuration message here
+                        lblError.Text = String.Format(Localization.GetString("ErrorConfig", LocalResourceFile), EditUrl("ModuleId", ModuleId.ToString(CultureInfo.InvariantCulture), "Module"));
+                        lblError.Visible = true;
                     }
                 }
             }
@@ -95,266 +100,113 @@ namespace Shift8Read.Dnn.CommunityCreditSubmit
 
         #endregion
 
-        private void cboCategories_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            BindData();
-        }
-
-        private void cboWorkflow_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            BindData();
-        }
 
         #region Private Methods
 
         private void FillDropDown()
         {
-            ItemRelationship.DisplayCategoryHierarchy(cboCategories, -1, PortalId, false);
-
-            ListItem li = new ListItem(Localization.GetString("ChooseOne", LocalResourceFile), "-1");
-            this.cboCategories.Items.Insert(0, li);
-
             //module settings for CC API
             CommunityCreditService cs = new CommunityCreditService(Settings["AffiliateCode"].ToString(), Settings["AffiliateKey"].ToString());
             CommunityCredit.Components.PointCategoryCollection pcc = cs.GetPointCategories();
+            //generate a list of Areas
+            ListItem blank = new ListItem(Localization.GetString("ChooseOne", LocalResourceFile), "-1");
+            ddlCategory.Items.Clear();
+            ddlCategory.Items.Add(blank);
 
             foreach (PointCategory pcat in pcc)
             {
-                cboCCCategories.Items.Add(new ListItem(pcat.Code, pcat.ID.ToString()));
+                ListItem li = new ListItem(pcat.Area, pcat.Area);
+                if (!ddlCategory.Items.Contains(li))
+                {
+                    ddlCategory.Items.Add(li);
+                }
             }
-
         }
 
-        
-
-        private DataTable GetGridData()
-        {
-            int categoryId = Convert.ToInt32(this.cboCategories.SelectedValue, CultureInfo.InvariantCulture);
-
-            //set the approval status ID to approved by default, if we're using approvals look for the selected value
-            int approvalStatusId = ApprovalStatus.Approved.GetId();
-
-
-            dgItems.DataSourceID = string.Empty;
-            DataSet ds = DataProvider.Instance().GetAdminItemListing(categoryId, ItemType.Article.GetId(), RelationshipType.ItemToParentCategory.GetId(), RelationshipType.ItemToRelatedCategory.GetId(), approvalStatusId, " vi.createddate desc ", PortalId);
-            return ds.Tables[0];
-        }
 
         private void BindData()
         {
-
-            dgItems.DataSource = GetGridData();
-            dgItems.DataBind();
-
-            dgItems.Visible = true;
-            lblMessage.Visible = false;
-
-            if (dgItems.Rows.Count < 1)
-            {
-                this.lblMessage.Text = String.Format(CultureInfo.CurrentCulture, Localization.GetString("NoArticlesFoundNoApproval", LocalResourceFile), cboCategories.SelectedItem.ToString());
-                dgItems.Visible = false;
-                lblMessage.Visible = true;
-            }
         }
 
-        private int CategoryId
-        {
-            get
-            {
-                string id = Request.QueryString["categoryid"];
-                return (id == null ? -1 : Convert.ToInt32(id, CultureInfo.InvariantCulture));
-            }
-        }
-
-
-        private string GridViewSortDirection
-        {
-            get { return ViewState["SortDirection"] as string ?? "ASC"; }
-            set { ViewState["SortDirection"] = value; }
-        }
-
-        private string GridViewSortExpression
-        {
-            get { return ViewState["SortExpression"] as string ?? string.Empty; }
-            set { ViewState["SortExpression"] = value; }
-        }
-
-
-        private string GetSortDirection()
-        {
-            switch (GridViewSortDirection)
-            {
-                case "ASC":
-                    GridViewSortDirection = "DESC";
-                    break;
-
-                case "DESC":
-                    GridViewSortDirection = "ASC";
-                    break;
-            }
-            return GridViewSortDirection;
-        }
-
-        //private string CategoryName
-        //{
-        //    get	{return (Convert.ToString(Request.QueryString["category"]));}
-        //}
-
-        private int TopLevelId
-        {
-            get
-            {
-                string s = Request.QueryString["topLevelId"];
-                return (s == null ? -1 : Convert.ToInt32(s, CultureInfo.InvariantCulture));
-            }
-        }
 
         #endregion
 
         #region Protected Methods
 
-        protected void dgItems_PageIndexChanging(object sender, GridViewPageEventArgs e)
-        {
-            dgItems.DataSource = SortDataTable(GetGridData(), true);
-            dgItems.PageIndex = e.NewPageIndex;
-            dgItems.DataBind();
-        }
-
-        protected DataView SortDataTable(DataTable dataTable, bool isPageIndexChanging)
-        {
-            if (dataTable != null)
-            {
-                DataView dataView = new DataView(dataTable);
-                if (!string.IsNullOrEmpty(GridViewSortExpression))
-                {
-                    if (isPageIndexChanging)
-                    {
-                        dataView.Sort = string.Format(CultureInfo.InvariantCulture, "{0} {1}", GridViewSortExpression, GridViewSortDirection);
-                    }
-                    else
-                    {
-                        dataView.Sort = string.Format(CultureInfo.InvariantCulture, "{0} {1}", GridViewSortExpression, GetSortDirection());
-                    }
-                }
-                return dataView;
-            }
-            else
-            {
-                return new DataView();
-            }
-        }
 
 
-        protected void dgItems_Sorting(object sender, GridViewSortEventArgs e)
-        {
-            GridViewSortExpression = e.SortExpression;
-            int pageIndex = dgItems.PageIndex;
-            dgItems.DataSource = SortDataTable(GetGridData(), true);
-            //dgItems.DataSource = SortDataTable(dgItems.DataSource as DataTable, false);
-            dgItems.DataBind();
-            dgItems.PageIndex = pageIndex;
-        }
 
-        protected static string GetDescription(object description)
+        protected void lbSubmit_Click(object sender, EventArgs e)
         {
-            if (description != null)
-            {
-                return HtmlUtils.Shorten(HtmlUtils.Clean(description.ToString(), true), 200, string.Empty) + "&nbsp";
-            }
-            return string.Empty;
-        }
-        
-        protected void cmdSubmit_Click(object sender, EventArgs e)
-        {
-            //parse through the checked items in the list and approve them.
             try
             {
-                foreach (GridViewRow gvr in dgItems.Rows)
+                CommunityCreditService cs = new CommunityCreditService(Settings["AffiliateCode"].ToString(), Settings["AffiliateKey"].ToString());
+                CommunityCredit.Components.Earner ec = new CommunityCredit.Components.Earner(UserInfo.FirstName, UserInfo.LastName, UserInfo.Email);
+                CommunityCredit.Components.PointCategory pc = null;
+                CommunityCredit.Components.PointCategoryCollection pcc = cs.GetPointCategories();
+
+                foreach (PointCategory pcat in pcc)
                 {
-                    try
+                    if (pcat.ID.ToString() == ddlSubCategory.SelectedValue)
                     {
-                        HyperLink hlId = (HyperLink)gvr.FindControl("hlId");
-                        CheckBox cb = (CheckBox)gvr.FindControl("chkSelect");
-                        if (hlId != null && cb != null && cb.Checked)
-                        {
-                            //approve
-                            Article a = (Article)Item.GetItem(Convert.ToInt32(hlId.Text), PortalId, ItemType.Article.GetId(), false);
-                            
-                            
-                            CommunityCreditService cs = new CommunityCreditService(Settings["AffiliateCode"].ToString(), Settings["AffiliateKey"].ToString());
-                            
-                            CommunityCredit.Components.Earner ec = new CommunityCredit.Components.Earner(Settings["FirstName"].ToString(), Settings["LastName"].ToString(), Settings["EmailAddress"].ToString());
-                            CommunityCredit.Components.PointCategory pc = null;
-                            CommunityCredit.Components.PointCategoryCollection pcc = cs.GetPointCategories();
-
-                            foreach (PointCategory pcat in pcc)
-                            {
-                                //regular blog post
-                                if (pcat.ID.ToString() == cboCCCategories.SelectedValue)
-                                {
-                                    pc = pcat;
-                                    break;
-                                }
-                            }
-
-                            //build up the Publish urls and submit
-                            //TODO: localize this text
-                            CommunityCredit.Components.Task tc = new CommunityCredit.Components.Task("Blog post: " + a.Name,
-                                Utility.GetItemLinkUrl(a.ItemId.ToString(),PortalId), pc);
-                            if (tc != null)
-                                cs.AddCommunityCredit(ec, tc, Convert.ToDateTime(a.StartDate));
-                        }
-                    }
-                    catch (Exception exc)
-                    {
-                        Exceptions.ProcessModuleLoadException(this, exc);
+                        pc = pcat;
+                        break;
                     }
                 }
-                //success
-                //TODO: we need to display a friendly submission message here. 
+                //TODO: localize this text
+                CommunityCredit.Components.Task tc = new CommunityCredit.Components.Task(txtDescription.Text.Trim(),
+                   txtUrl.Text.Trim(), pc);
+                if (tc != null)
+                    cs.AddCommunityCredit(ec, tc, Convert.ToDateTime(txtDateEarned.Text.Trim()));
+
+                //add submission confirmation text
+                lblError.Text = Localization.GetString("SubmissionConfirmed", LocalResourceFile);
+                txtDateEarned.Text = string.Empty;
+                txtUrl.Text = string.Empty;
+                txtDescription.Text = string.Empty;
+
+
             }
             catch (Exception exc)
             {
                 Exceptions.ProcessModuleLoadException(this, exc);
             }
         }
-
         #endregion
-
-        public string BuildLinkUrl(string qsParameters)
-        {
-            return DotNetNuke.Common.Globals.NavigateURL(TabId, "", qsParameters);
-        }
-
-        public static string ApplicationUrl
-        {
-            get
-            {
-                if (HttpContext.Current != null)
-                {
-                    return HttpContext.Current.Request.ApplicationPath == "/" ? string.Empty : HttpContext.Current.Request.ApplicationPath;
-                }
-                return string.Empty;
-            }
-        }
-
-
-        public string GetItemLinkUrl(object itemId)
-        {
-            return Utility.GetItemLinkUrl(Convert.ToInt32(itemId), PortalId, TabId, ModuleId, 0, "");
-            #region "old code"
-
-            #endregion
-        }
 
 
         #region Optional Interfaces
 
 
-
-
+        public ModuleActionCollection ModuleActions
+        {
+            get
+            {
+                ModuleActionCollection actions = new ModuleActionCollection();
+                actions.Add(GetNextActionID(), Localization.GetString("PublishLink", LocalResourceFile), "", "", "", EditUrl("Publish"), false, SecurityAccessLevel.Edit, true, false);
+                //actions.Add(GetNextActionID(), Localization.GetString("ClearCache", LocalSharedResourceFile), "", "", "", EditUrl(Utility.AdminContainer), false, SecurityAccessLevel.Edit, true, false);
+                return actions;
+            }
+        }
 
         #endregion
+
+        protected void ddlCategory_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ddlSubCategory.Items.Clear();
+
+            //module settings for CC API
+            CommunityCreditService cs = new CommunityCreditService(Settings["AffiliateCode"].ToString(), Settings["AffiliateKey"].ToString());
+            CommunityCredit.Components.PointCategoryCollection pcc = cs.GetPointCategories();
+            //generate a list of Areas
+
+            foreach (PointCategory pcat in pcc)
+            {
+                if (pcat.Area == ddlCategory.SelectedValue)
+                    ddlSubCategory.Items.Add(new ListItem(pcat.Code, pcat.ID.ToString()));
+            }
+
+        }
 
     }
 

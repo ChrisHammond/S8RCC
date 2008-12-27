@@ -150,4 +150,19 @@
   <data name="SubmissionConfirmed.Text" xml:space="preserve">
     <value>Your Community Credit submission was successful.</value>
   </data>
+  <data name="lblCategory.Help" xml:space="preserve">
+    <value>Choose a Category</value>
+  </data>
+  <data name="lblDateEarned.Help" xml:space="preserve">
+    <value>When was this earned?</value>
+  </data>
+  <data name="lblDescription.Help" xml:space="preserve">
+    <value>Enter a description for this activity.</value>
+  </data>
+  <data name="lblSubCategory.Help" xml:space="preserve">
+    <value>Choose a SubCategory</value>
+  </data>
+  <data name="lblUrl.Help" xml:space="preserve">
+    <value>Enter the URL of the site showing credit for this activity.</value>
+  </data>
 </root>

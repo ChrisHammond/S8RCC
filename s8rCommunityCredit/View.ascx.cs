@@ -82,7 +82,6 @@ namespace Shift8Read.Dnn.CommunityCreditSubmit
                     if (Settings.Contains("AffiliateKey") && Settings.Contains("AffiliateCode") && UserInfo !=null)
                     {
                         FillDropDown();
-                        BindData();
                     }
                     else
                     {
@@ -123,10 +122,6 @@ namespace Shift8Read.Dnn.CommunityCreditSubmit
             }
         }
 
-
-        private void BindData()
-        {
-        }
 
 
         #endregion
@@ -203,7 +198,7 @@ namespace Shift8Read.Dnn.CommunityCreditSubmit
             foreach (PointCategory pcat in pcc)
             {
                 if (pcat.Area == ddlCategory.SelectedValue)
-                    ddlSubCategory.Items.Add(new ListItem(pcat.Code, pcat.ID.ToString()));
+                    ddlSubCategory.Items.Add(new ListItem(pcat.Code  + " (" + pcat.Value + "pts)", pcat.ID.ToString()));
             }
 
         }

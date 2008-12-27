@@ -76,7 +76,7 @@ namespace Shift8Read.Dnn.CommunityCreditSubmit
                 if (!Page.IsPostBack)
                 {
                     //check to see if the settings are configured first.
-                    if (Settings.Contains("AffiliateKey") && Settings.Contains("AffiliateCode") && Settings.Contains("FirstName") && Settings.Contains("LastName") && Settings.Contains("EmailAddress"))
+                    if (Settings.Contains("AffiliateKey") && Settings.Contains("AffiliateCode") && UserInfo!=null)
                     {
                         FillDropDown();
                         BindData();
@@ -283,7 +283,7 @@ namespace Shift8Read.Dnn.CommunityCreditSubmit
                             
                             CommunityCreditService cs = new CommunityCreditService(Settings["AffiliateCode"].ToString(), Settings["AffiliateKey"].ToString());
                             
-                            CommunityCredit.Components.Earner ec = new CommunityCredit.Components.Earner(Settings["FirstName"].ToString(), Settings["LastName"].ToString(), Settings["EmailAddress"].ToString());
+                            CommunityCredit.Components.Earner ec = new CommunityCredit.Components.Earner(UserInfo.FirstName, UserInfo.LastName, UserInfo.Email);
                             CommunityCredit.Components.PointCategory pc = null;
                             CommunityCredit.Components.PointCategoryCollection pcc = cs.GetPointCategories();
 

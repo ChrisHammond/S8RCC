@@ -148,7 +148,7 @@
     <value>Engage Publish Postings</value>
   </data>
   <data name="SubmissionConfirmed.Text" xml:space="preserve">
-    <value>Your Community Credit submission was successful.</value>
+    <value>Your Community Credit submission was successful. &lt;br /&gt;</value>
   </data>
   <data name="lblCategory.Help" xml:space="preserve">
     <value>Choose a Category</value>

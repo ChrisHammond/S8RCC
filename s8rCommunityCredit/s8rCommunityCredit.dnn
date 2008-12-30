@@ -6,7 +6,7 @@
       <foldername>s8rCommunityCredit</foldername>
       <modulename>s8rCommunityCredit</modulename>
       <description>s8rCommunityCredit module</description>
-      <version>01.05.00</version>
+      <version>01.05.01</version>
       <resourcefile>Resources.zip</resourcefile>
       <businesscontrollerclass></businesscontrollerclass>
       <modules>

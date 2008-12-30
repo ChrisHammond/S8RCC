@@ -2,7 +2,7 @@
 <%@ Register TagPrefix="dnn" TagName="label" Src="~/controls/labelControl.ascx" %>
 <div class="Normal">
     <div>
-        <asp:Label ID="lblError" runat="server" Visible="false" CssClass="NormalRed"></asp:Label>
+        <div class="ErrorMessage"><asp:Label ID="lblError" runat="server" Visible="false" CssClass="NormalRed"></asp:Label></div>
         <asp:Label ID="lblUserInfo" runat="server" Visible="true" resourcekey="lblUserInfo"></asp:Label>
     </div>
 

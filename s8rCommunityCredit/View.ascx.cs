@@ -58,7 +58,6 @@ namespace Shift8Read.Dnn.CommunityCreditSubmit
             {
                 DotNetNuke.Framework.AJAX.RegisterScriptManager();
             }
-
         }
 
         private void InitializeComponent()
@@ -156,17 +155,36 @@ namespace Shift8Read.Dnn.CommunityCreditSubmit
 
                 //add submission confirmation text
                 lblError.Text = Localization.GetString("SubmissionConfirmed", LocalResourceFile);
-                txtDateEarned.Text = string.Empty;
+                lblError.Visible = true;
+                //txtDateEarned.Text = string.Empty;
                 txtUrl.Text = string.Empty;
-                txtDescription.Text = string.Empty;
-
-
+                //txtDescription.Text = string.Empty;
+                
             }
             catch (Exception exc)
             {
                 Exceptions.ProcessModuleLoadException(this, exc);
+
             }
         }
+
+        protected void ddlCategory_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ddlSubCategory.Items.Clear();
+
+            //module settings for CC API
+            CommunityCreditService cs = new CommunityCreditService(Settings["AffiliateCode"].ToString(), Settings["AffiliateKey"].ToString());
+            CommunityCredit.Components.PointCategoryCollection pcc = cs.GetPointCategories();
+            //generate a list of Areas
+
+            foreach (PointCategory pcat in pcc)
+            {
+                if (pcat.Area == ddlCategory.SelectedValue)
+                    ddlSubCategory.Items.Add(new ListItem(pcat.Code + " (" + pcat.Value + "pts)", pcat.ID.ToString()));
+            }
+
+        }
+
         #endregion
 
 
@@ -186,22 +204,6 @@ namespace Shift8Read.Dnn.CommunityCreditSubmit
 
         #endregion
 
-        protected void ddlCategory_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            ddlSubCategory.Items.Clear();
-
-            //module settings for CC API
-            CommunityCreditService cs = new CommunityCreditService(Settings["AffiliateCode"].ToString(), Settings["AffiliateKey"].ToString());
-            CommunityCredit.Components.PointCategoryCollection pcc = cs.GetPointCategories();
-            //generate a list of Areas
-
-            foreach (PointCategory pcat in pcc)
-            {
-                if (pcat.Area == ddlCategory.SelectedValue)
-                    ddlSubCategory.Items.Add(new ListItem(pcat.Code  + " (" + pcat.Value + "pts)", pcat.ID.ToString()));
-            }
-
-        }
 
     }
 

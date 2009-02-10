@@ -81,6 +81,9 @@ namespace Shift8Read.Dnn.CommunityCreditSubmit
                     if (Settings.Contains("AffiliateKey") && Settings.Contains("AffiliateCode") && UserInfo !=null)
                     {
                         FillDropDown();
+                        //prepopulate the date with today's date
+                        txtDateEarned.Text = DateTime.Now.ToShortDateString();
+
                     }
                     else
                     {

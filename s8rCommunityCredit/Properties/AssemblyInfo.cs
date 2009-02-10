@@ -24,7 +24,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyCopyright("2008 Shift8Read")]
+[assembly: AssemblyCopyright("2009 Shift8Read")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]
@@ -40,7 +40,7 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
 
-[assembly: AssemblyVersion("01.05.01.*")]
+[assembly: AssemblyVersion("01.05.02.*")]
 [assembly: AssemblyDelaySign(false)]
 [assembly: AssemblyKeyFile("")]
 [assembly: AssemblyKeyName("")]

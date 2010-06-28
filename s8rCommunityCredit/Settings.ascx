@@ -6,3 +6,5 @@
 <br />
 <dnn:label id="lblAffiliateKey" runat="server" class="Head"></dnn:label> <asp:TextBox ID="txtAffiliateKey" runat="server"></asp:TextBox>
 <br />
+<dnn:label id="lblEmailAddress" runat="server" class="Head"></dnn:label> <asp:TextBox ID="txtEmailAddress" runat="server"></asp:TextBox>
+<br />

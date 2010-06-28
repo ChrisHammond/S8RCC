@@ -117,13 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ChooseOne.Text" xml:space="preserve">
-    <value>Choose One</value>
+  <data name="btnSubmit.Text" xml:space="preserve">
+    <value>submit</value>
   </data>
-  <data name="ControlTitle_publish.Text" xml:space="preserve">
-    <value>Publish Posts</value>
+  <data name="ControlTitle_getposts.Text" xml:space="preserve">
+    <value>Get Posts</value>
   </data>
-  <data name="lblItemType.Text" xml:space="preserve">
-    <value>Choose Item Type</value>
+  <data name="lblEndDate.Help" xml:space="preserve">
+    <value>Choose an end date for your report</value>
+  </data>
+  <data name="lblEndDate.Text" xml:space="preserve">
+    <value>End Date</value>
+  </data>
+  <data name="lblStartDate.Help" xml:space="preserve">
+    <value>Choose a start date for your report</value>
+  </data>
+  <data name="lblStartDate.Text" xml:space="preserve">
+    <value>Start Date</value>
   </data>
 </root>

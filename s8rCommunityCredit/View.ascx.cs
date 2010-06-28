@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004-2008 Shift8Read.com
+ * Copyright (c) 2004-2010 Shift8Read.com
  * All rights reserved.
  * 
  * 
@@ -41,7 +41,7 @@ namespace Shift8Read.Dnn.CommunityCreditSubmit
 
     /// -----------------------------------------------------------------------------
     /// <summary>
-    /// The Views8rCommunityCredit class displays the content
+    /// The View class displays the content
     /// </summary>
     /// -----------------------------------------------------------------------------
     public partial class View : ModuleBase, IActionable
@@ -53,7 +53,6 @@ namespace Shift8Read.Dnn.CommunityCreditSubmit
         {
 
             InitializeComponent();
-            base.OnInit(e);
             if (DotNetNuke.Framework.AJAX.IsInstalled())
             {
                 DotNetNuke.Framework.AJAX.RegisterScriptManager();
@@ -200,7 +199,7 @@ namespace Shift8Read.Dnn.CommunityCreditSubmit
             {
                 ModuleActionCollection actions = new ModuleActionCollection();
                 actions.Add(GetNextActionID(), Localization.GetString("PublishLink", LocalResourceFile), "", "", "", EditUrl("Publish"), false, SecurityAccessLevel.Edit, true, false);
-                //actions.Add(GetNextActionID(), Localization.GetString("ClearCache", LocalSharedResourceFile), "", "", "", EditUrl(Utility.AdminContainer), false, SecurityAccessLevel.Edit, true, false);
+                actions.Add(GetNextActionID(), Localization.GetString("GetPosts", LocalResourceFile), "", "", "", EditUrl("GetPosts"), false, SecurityAccessLevel.Edit, true, false);
                 return actions;
             }
         }

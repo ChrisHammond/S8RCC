@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004-2008 Shift8Read.com
+ * Copyright (c) 2004-2010 Shift8Read.com
  * All rights reserved.
  * 
  * 
@@ -50,6 +50,8 @@ namespace Shift8Read.Dnn.CommunityCreditSubmit
                 {
                     txtAffiliateCode.Text = AffiliateCode.ToString(CultureInfo.CurrentCulture);
                     txtAffiliateKey.Text = AffiliateKey.ToString(CultureInfo.CurrentCulture);
+                    txtEmailAddress.Text = EmailAddress.ToString(CultureInfo.CurrentCulture);
+
                 }
             }
             catch (Exception exc) //Module failed to load
@@ -71,6 +73,7 @@ namespace Shift8Read.Dnn.CommunityCreditSubmit
                 //modules.UpdateTabModuleSetting(this.TabModuleId, "LogBreadCrumb", (chkLogBreadcrumb.Checked ? "true" : "false"));
                 AffiliateCode = txtAffiliateCode.Text.Trim().ToString();
                 AffiliateKey = txtAffiliateKey.Text.Trim().ToString();
+                EmailAddress = txtEmailAddress.Text.Trim().ToString();
             }
             catch (Exception exc) //Module failed to load
             {
@@ -111,6 +114,23 @@ namespace Shift8Read.Dnn.CommunityCreditSubmit
                 return string.Empty;
             }
         }
+
+        private string EmailAddress
+        {
+            set
+            {
+                ModuleController modules = new ModuleController();
+                modules.UpdateTabModuleSetting(this.TabModuleId, "EmailAddress", value.ToString(CultureInfo.InvariantCulture));
+            }
+            get
+            {
+                object o = Settings["EmailAddress"];
+                if (o != null)
+                    return (o.ToString());
+                return string.Empty;
+            }
+        }
+
     }
 }
 

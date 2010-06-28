@@ -1,5 +1,5 @@
 /*
-' Copyright (c) 2004-2008 Shift8Read
+' Copyright (c) 2004-2010 Shift8Read
 '  All rights reserved.
 ' 
 ' THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
@@ -10,10 +10,11 @@
 ' 
 */
 
-using DotNetNuke.Entities.Modules;
 
 namespace Shift8Read.Dnn.CommunityCreditSubmit
 {
+
+    using DotNetNuke.Entities.Modules;
 
     public class SettingsBase : ModuleSettingsBase
     {

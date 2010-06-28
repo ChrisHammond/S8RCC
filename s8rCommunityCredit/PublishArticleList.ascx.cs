@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004-2008 Shift8Read.com
+ * Copyright (c) 2004-2010 Shift8Read.com
  * All rights reserved.
  * 
  * 
@@ -50,7 +50,6 @@ namespace Shift8Read.Dnn.CommunityCreditSubmit
         {
 
             InitializeComponent();
-            base.OnInit(e);
             if (DotNetNuke.Framework.AJAX.IsInstalled())
             {
                 DotNetNuke.Framework.AJAX.RegisterScriptManager();

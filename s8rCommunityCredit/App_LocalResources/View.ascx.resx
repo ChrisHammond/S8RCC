@@ -165,4 +165,7 @@
   <data name="lblUrl.Help" xml:space="preserve">
     <value>Enter the URL of the site showing credit for this activity.</value>
   </data>
+  <data name="GetPosts.Text" xml:space="preserve">
+    <value>Get Old Posts</value>
+  </data>
 </root>

@@ -1,7 +1,7 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "s8rCommunityCredit", "s8rCommunityCredit.csproj", "{017A9521-99FD-43C7-B999-017DC3D63B08}"
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{00000000-0000-0000-0000-000000000000}") = "s8rCommunityCredit", "s8rCommunityCredit.csproj", "{017A9521-99FD-43C7-B999-017DC3D63B08}"
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution

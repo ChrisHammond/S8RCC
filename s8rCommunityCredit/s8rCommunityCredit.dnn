@@ -6,7 +6,7 @@
       <foldername>s8rCommunityCredit</foldername>
       <modulename>s8rCommunityCredit</modulename>
       <description>s8rCommunityCredit module</description>
-      <version>01.05.02</version>
+      <version>02.00.00</version>
       <resourcefile>Resources.zip</resourcefile>
       <businesscontrollerclass></businesscontrollerclass>
       <modules>
@@ -34,6 +34,14 @@
               <type>View</type>
               <helpurl></helpurl>
             </control>
+            <control>
+              <key>GetPosts</key>
+              <title>Get Old Posts</title>
+              <src>DesktopModules/s8rCommunityCredit/GetPosts.ascx</src>
+              <type>View</type>
+              <helpurl></helpurl>
+            </control>
+
           </controls>
         </module>
       </modules>
